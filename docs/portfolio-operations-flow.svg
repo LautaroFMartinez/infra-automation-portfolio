@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 760" role="img" aria-labelledby="title desc">
+  <title id="title">Technical service delivery architecture</title>
+  <desc id="desc">A sanitized flow from a qualified opportunity through a bounded phase one, implementation, evidence, handoff and a reusable case study.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#020617"/>
+      <stop offset="1" stop-color="#111827"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#1e293b" stroke-width="0.6"/>
+    </pattern>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="4" orient="auto">
+      <path d="M0 0L0 8L11 4Z" fill="#67e8f9"/>
+    </marker>
+    <marker id="arrowAmber" markerWidth="12" markerHeight="12" refX="10" refY="4" orient="auto">
+      <path d="M0 0L0 8L11 4Z" fill="#fbbf24"/>
+    </marker>
+    <style>
+      .title { fill:#f8fafc; font:700 28px ui-monospace, SFMono-Regular, Menlo, monospace; }
+      .subtitle { fill:#94a3b8; font:15px ui-monospace, SFMono-Regular, Menlo, monospace; }
+      .label { fill:#f8fafc; font:700 17px ui-monospace, SFMono-Regular, Menlo, monospace; }
+      .small { fill:#cbd5e1; font:13px ui-monospace, SFMono-Regular, Menlo, monospace; }
+      .tiny { fill:#94a3b8; font:11px ui-monospace, SFMono-Regular, Menlo, monospace; }
+      .box { fill:#0f172a; stroke:#334155; stroke-width:2; }
+      .cyan { stroke:#22d3ee; }
+      .green { stroke:#34d399; }
+      .violet { stroke:#a78bfa; }
+      .amber { stroke:#fbbf24; }
+      .rose { stroke:#fb7185; }
+      .flow { fill:none; stroke:#67e8f9; stroke-width:3; marker-end:url(#arrow); }
+      .feedback { fill:none; stroke:#fbbf24; stroke-width:2; stroke-dasharray:9 8; marker-end:url(#arrowAmber); }
+      .pill { fill:#172033; stroke:#475569; stroke-width:1; }
+    </style>
+  </defs>
+  <rect width="1400" height="760" fill="url(#bg)"/>
+  <rect width="1400" height="760" fill="url(#grid)" opacity="0.65"/>
+  <text x="64" y="68" class="title">From qualified opportunity to verified delivery</text>
+  <text x="64" y="98" class="subtitle">Sanitized commercial and technical workflow — no client data or credentials</text>
+
+  <path d="M270 270H350" class="flow"/>
+  <path d="M590 270H670" class="flow"/>
+  <path d="M910 270H990" class="flow"/>
+  <path d="M1120 395V500H800V560" class="flow"/>
+  <path d="M800 650H530V430" class="feedback"/>
+
+  <rect x="64" y="190" width="206" height="160" rx="14" class="box cyan"/>
+  <text x="167" y="228" text-anchor="middle" class="label">Opportunity</text>
+  <text x="167" y="260" text-anchor="middle" class="small">Workana · referral</text>
+  <text x="167" y="284" text-anchor="middle" class="small">clear pain</text>
+  <text x="167" y="308" text-anchor="middle" class="small">qualified scope</text>
+  <text x="167" y="332" text-anchor="middle" class="tiny">fit / risk / outcome score</text>
+
+  <rect x="350" y="190" width="240" height="160" rx="14" class="box amber"/>
+  <text x="470" y="228" text-anchor="middle" class="label">Phase 1</text>
+  <text x="470" y="260" text-anchor="middle" class="small">audit or one workflow</text>
+  <text x="470" y="284" text-anchor="middle" class="small">deliverables</text>
+  <text x="470" y="308" text-anchor="middle" class="small">out of scope</text>
+  <text x="470" y="332" text-anchor="middle" class="tiny">reversible checkpoint</text>
+
+  <rect x="670" y="190" width="240" height="160" rx="14" class="box green"/>
+  <text x="790" y="228" text-anchor="middle" class="label">Implementation</text>
+  <text x="790" y="260" text-anchor="middle" class="small">Linux · Docker</text>
+  <text x="790" y="284" text-anchor="middle" class="small">monitoring · backup</text>
+  <text x="790" y="308" text-anchor="middle" class="small">API · n8n</text>
+  <text x="790" y="332" text-anchor="middle" class="tiny">logs + rollback notes</text>
+
+  <rect x="990" y="190" width="260" height="205" rx="14" class="box violet"/>
+  <text x="1120" y="228" text-anchor="middle" class="label">Evidence</text>
+  <text x="1120" y="260" text-anchor="middle" class="small">health checks</text>
+  <text x="1120" y="284" text-anchor="middle" class="small">backup decrypt/list</text>
+  <text x="1120" y="308" text-anchor="middle" class="small">metrics and logs</text>
+  <text x="1120" y="332" text-anchor="middle" class="small">acceptance criteria</text>
+  <text x="1120" y="370" text-anchor="middle" class="tiny">no “done” without verification</text>
+
+  <rect x="650" y="560" width="300" height="110" rx="14" class="box rose"/>
+  <text x="800" y="600" text-anchor="middle" class="label">Handoff</text>
+  <text x="800" y="630" text-anchor="middle" class="small">documentation · next steps</text>
+  <text x="800" y="652" text-anchor="middle" class="tiny">optional maintenance or case study</text>
+
+  <rect x="64" y="470" width="360" height="130" rx="14" class="pill"/>
+  <text x="88" y="510" class="label">Commercial guardrails</text>
+  <text x="88" y="540" class="small">• no unbounded “build everything” scope</text>
+  <text x="88" y="566" class="small">• no credentials or off-platform payments</text>
+  <text x="88" y="592" class="small">• one measurable first stage</text>
+
+  <text x="64" y="720" class="tiny">Operational principle: scope small → change safely → measure → document → reuse the proof.</text>
+</svg>

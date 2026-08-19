@@ -21,6 +21,7 @@ These are sanitized demonstrations and laboratory work. They are not presented a
 - [Backup verification](cases/backup-verification/README.md)
 - [Monitoring and alerting](cases/monitoring-stack/README.md)
 - [n8n and API automation](cases/n8n-api-automation/README.md)
+- [Production operations case studies](cases/production-operations/README.md)
 
 ## Delivery principles
 

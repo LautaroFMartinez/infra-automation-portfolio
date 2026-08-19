@@ -102,7 +102,9 @@ The backlog contributed to message loss and created a risk that the machine woul
 
 ### Response
 
-I investigated the affected RabbitMQ component, coordinated the recovery and stopped the affected component before the machine reached a more severe resource-exhaustion condition. The exact component that was stopped and the precise recovery time are intentionally left for confirmation rather than inferred from the ticket summary.
+The affected RabbitMQ node became stuck while the backlog continued to grow. Because the responsible team could not bring the consumers back up at first, I helped coordinate a manual flush of the messages through the message-management operation. This discarded the queued messages, but prevented the machine from reaching a more severe resource-exhaustion condition. Once the consumers were available again, they could drain new messages normally.
+
+The exact recovery time is not documented and is intentionally not claimed here.
 
 ### Prevention
 
@@ -116,5 +118,5 @@ The related log-rotation change was promoted successfully to production, reducin
 
 - These cases describe real operational work but remain intentionally anonymized.
 - The CI/CD case is ongoing and does not claim final host retirement.
-- The RabbitMQ case does not claim an exact recovery time or identify which component was stopped.
+- The RabbitMQ case documents the manual message flush and does not claim an exact recovery time.
 - No customer names, internal identifiers, hostnames, IPs, domains or proprietary configuration are included.

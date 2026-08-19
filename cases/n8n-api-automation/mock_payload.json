@@ -1,0 +1,10 @@
+{
+  "event": "new_form_submission",
+  "source": "demo-form",
+  "customer": {
+    "name": "Example Company",
+    "email": "demo@example.invalid"
+  },
+  "requested_service": "automation-audit",
+  "requires_human_review": true
+}

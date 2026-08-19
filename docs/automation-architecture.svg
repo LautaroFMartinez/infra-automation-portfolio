@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">Sanitized automation and operations architecture</title>
+  <desc id="desc">A request enters an automation workflow, is validated, calls an API, persists an outcome, and sends an observable notification. Human review protects uncertain or irreversible actions.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#0b1220"/>
+      <stop offset="1" stop-color="#111827"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#7dd3fc"/>
+    </marker>
+    <style>
+      .box { fill: #172033; stroke: #334155; stroke-width: 2; rx: 14; }
+      .accent { stroke: #7dd3fc; }
+      .review { stroke: #fbbf24; }
+      .title { fill: #f8fafc; font: 700 22px system-ui, sans-serif; }
+      .label { fill: #f8fafc; font: 600 17px system-ui, sans-serif; }
+      .small { fill: #a5b4fc; font: 14px system-ui, sans-serif; }
+      .line { stroke: #7dd3fc; stroke-width: 3; fill: none; marker-end: url(#arrow); }
+      .dashed { stroke: #fbbf24; stroke-width: 2; stroke-dasharray: 8 7; fill: none; }
+    </style>
+  </defs>
+  <rect width="1200" height="620" fill="url(#bg)"/>
+  <text x="60" y="64" class="title">Automation with validation, human review and observability</text>
+  <text x="60" y="94" class="small">Sanitized reference architecture — no client or production data</text>
+
+  <rect x="60" y="190" width="190" height="125" class="box accent"/>
+  <text x="155" y="232" text-anchor="middle" class="label">Input</text>
+  <text x="155" y="262" text-anchor="middle" class="small">form · email · webhook</text>
+  <text x="155" y="286" text-anchor="middle" class="small">synthetic payload</text>
+
+  <rect x="330" y="190" width="210" height="125" class="box accent"/>
+  <text x="435" y="232" text-anchor="middle" class="label">Workflow</text>
+  <text x="435" y="262" text-anchor="middle" class="small">validate · deduplicate</text>
+  <text x="435" y="286" text-anchor="middle" class="small">log · retry safely</text>
+
+  <rect x="620" y="190" width="190" height="125" class="box accent"/>
+  <text x="715" y="232" text-anchor="middle" class="label">API / service</text>
+  <text x="715" y="262" text-anchor="middle" class="small">protected credentials</text>
+  <text x="715" y="286" text-anchor="middle" class="small">explicit contract</text>
+
+  <rect x="890" y="190" width="250" height="125" class="box accent"/>
+  <text x="1015" y="232" text-anchor="middle" class="label">Outcome</text>
+  <text x="1015" y="262" text-anchor="middle" class="small">persisted result</text>
+  <text x="1015" y="286" text-anchor="middle" class="small">notification / report</text>
+
+  <path d="M250 252 H330" class="line"/>
+  <path d="M540 252 H620" class="line"/>
+  <path d="M810 252 H890" class="line"/>
+
+  <rect x="330" y="420" width="210" height="105" class="box review"/>
+  <text x="435" y="458" text-anchor="middle" class="label">Human review</text>
+  <text x="435" y="486" text-anchor="middle" class="small">uncertain or irreversible</text>
+  <text x="435" y="507" text-anchor="middle" class="small">actions pause safely</text>
+  <path d="M435 315 V420" class="dashed"/>
+
+  <rect x="620" y="420" width="190" height="105" class="box"/>
+  <text x="715" y="458" text-anchor="middle" class="label">Evidence</text>
+  <text x="715" y="486" text-anchor="middle" class="small">health checks · logs</text>
+  <text x="715" y="507" text-anchor="middle" class="small">replay and rollback</text>
+  <path d="M715 315 V420" class="dashed"/>
+</svg>

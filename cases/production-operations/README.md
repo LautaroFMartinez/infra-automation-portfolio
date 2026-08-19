@@ -6,11 +6,11 @@ These cases are anonymized summaries of real TEC/SIC operational work. They are 
 
 ### Context
 
-A fleet of production Linux servers was running an agent version approaching end of support. The fleet included messaging, DRM, licensing and backend services, and each host needed to land in the correct group and monitoring template after migration.
+A fleet of production Linux servers was running an agent version approaching end of support. The migration covered messaging, DRM, licensing and backend services, and each host needed to land in the correct group and monitoring template after the change.
 
 ### Challenge
 
-A manual replacement could leave hosts unregistered, attached to the wrong metadata or without the expected visibility during a change window.
+A manual replacement could leave hosts unregistered, attached to the wrong metadata or without monitoring visibility during the migration window.
 
 ### Approach
 
@@ -25,7 +25,7 @@ I designed and executed a repeatable runbook that included:
 
 ### Outcome
 
-The migration was executed in controlled batches using the same checklist and validation steps across multiple change windows. The runbook reduced manual decisions and made the migration repeatable.
+I migrated approximately **50 hosts** across controlled batches and multiple change windows. No rollback was required, and no host lost monitoring visibility for more than approximately **two minutes** during the migration.
 
 **Technologies:** Linux, Zabbix, Bash, monitoring proxies, Jira change management.
 
@@ -35,7 +35,7 @@ The migration was executed in controlled batches using the same checklist and va
 
 ### Context
 
-Several production deployment pipelines used a legacy SSH jump host as an intermediate step before reaching their runner or target environment.
+Several production deployment jobs used a legacy SSH jump host as an intermediate step before reaching their runner or target environment.
 
 ### Challenge
 
@@ -43,16 +43,16 @@ The host had become a single point of failure and a piece of infrastructure that
 
 ### Approach
 
-I mapped the affected jobs, migrated them to run directly from the runner, and validated that no production pipeline still depended on the legacy hop. The retirement was staged:
+I mapped the affected jobs, migrated them to run directly from the runner, and validated that the known production jobs no longer depended on the legacy hop. The retirement was staged:
 
-1. Decouple the known jobs.
+1. Decouple the affected jobs.
 2. Shut down the host in a controlled manner.
 3. Observe pipeline behavior during a rollback window.
 4. Remove the component only after the dependency check remained clean.
 
-### Outcome
+### Current outcome
 
-The deployment chain no longer depended on the legacy jump host, reducing operational debt and eliminating a single point of failure without a recorded production deployment outage.
+Approximately **15–20 jobs** have been migrated so far. The work is still in progress, so the final retirement of the legacy host is intentionally not claimed here.
 
 **Technologies:** CI/CD, SSH, deployment runners, legacy infrastructure retirement.
 
@@ -70,42 +70,51 @@ The environment needed additional capacity for the test window, but leaving it o
 
 ### Approach
 
-I coordinated the temporary vertical scaling of the search/indexing layer and a distributed column-oriented database before the test window. After the stress test, I coordinated the verified scale-down back to the baseline size.
+I coordinated the temporary vertical scaling of the search/indexing layer and a distributed column-oriented database. Capacity was increased to **twice the baseline** for the test window and then returned to the normal footprint afterward.
+
+The stress test measured the relevant operational signals, including:
+
+- CPU consumption.
+- Memory consumption.
+- Latency.
+- Error rate.
+- Throughput.
+- Cache behavior.
+- Overall service behavior under load.
 
 ### Outcome
 
-The performance test ran against a capacity level closer to the expected event conditions, while the environment returned to its normal footprint after the window.
+The stress test passed without issues. The temporary scaling provided a representative capacity profile for the expected event while avoiding permanent overprovisioning after the test window.
 
-**Technologies:** distributed search/indexing, distributed database, cloud capacity planning, change management.
-
----
-
-## Disk saturation in a production messaging cluster
-
-### Context
-
-Consumers depending on an AMQP messaging cluster stopped processing messages after one cluster node ran out of disk space.
-
-### Investigation and recovery
-
-I identified the affected node, diagnosed the disk saturation and freed enough space to restore the cluster and its dependent workers. A related preventive change reduced log retention and enabled compression in UAT before promotion to production.
-
-The ticket does not establish whether the disk usage was exclusively logs or also persisted queue data, nor does it document message loss or an exact recovery time. Those details are intentionally not claimed here.
-
-**Technologies:** AMQP messaging, Linux, logrotate, infrastructure monitoring.
+**Technologies:** distributed search/indexing, distributed database, cloud capacity planning, performance testing, change management.
 
 ---
 
-## Challenging a risky process-management fix
+## Disk and memory pressure in a production RabbitMQ cluster
 
 ### Context
 
-A monitoring alert reported an unusual accumulation of processes on a production Linux middleware server. A proposed fix was to add `wait $!` to a script that intentionally launched work asynchronously.
+Consumers connected to a production RabbitMQ cluster were processing messages too slowly. The backlog increased and the affected node accumulated resource pressure.
 
-### Technical assessment
+### Incident
 
-I identified that a blocking `wait` could change the intended asynchronous behavior rather than fix the underlying process/session problem. I proposed investigating inherited SSH/PTY file descriptors and considered a safer separation using `setsid` plus explicit descriptor redirection.
+The backlog contributed to message loss and created a risk that the machine would exhaust its available resources. Resolution also depended on another team, which extended the time needed to close the incident.
 
-The final root cause and whether the proposal was implemented are not documented in the source material, so this case is presented as a diagnostic review and risk prevention example, not as a claim of a completed production fix.
+### Response
 
-**Technologies:** Linux process management, SSH/PTY sessions, Bash, `setsid`, root-cause analysis.
+I investigated the affected RabbitMQ component, coordinated the recovery and stopped the affected component before the machine reached a more severe resource-exhaustion condition. The exact component that was stopped and the precise recovery time are intentionally left for confirmation rather than inferred from the ticket summary.
+
+### Prevention
+
+The related log-rotation change was promoted successfully to production, reducing the risk of log growth contributing to a recurrence.
+
+**Technologies:** RabbitMQ/AMQP, Linux, consumers, resource monitoring, logrotate, incident coordination.
+
+---
+
+## Publication notes
+
+- These cases describe real operational work but remain intentionally anonymized.
+- The CI/CD case is ongoing and does not claim final host retirement.
+- The RabbitMQ case does not claim an exact recovery time or identify which component was stopped.
+- No customer names, internal identifiers, hostnames, IPs, domains or proprietary configuration are included.

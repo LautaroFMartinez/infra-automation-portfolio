@@ -47,6 +47,7 @@ The live portfolio contains the longer-form case files and experience context. T
 - [Open the live portfolio](https://lau.ar)
 - [Browse the live case files](https://lau.ar/case-files/)
 - [Read the public production operations summary](cases/production-operations/README.md)
+- [Read the payment provider onboarding guide](docs/payment-provider-onboarding.md)
 
 ## Cases
 
@@ -65,6 +66,7 @@ The examples are designed to be inspectable and runnable where practical:
 - [Backup verification script](cases/backup-verification/verify_archive.py)
 - [Monitoring health check](cases/monitoring-stack/healthcheck.py)
 - [Synthetic n8n/API payload](cases/n8n-api-automation/mock_payload.json)
+- [Payment provider onboarding guide](docs/payment-provider-onboarding.md)
 - [Portfolio checks workflow](.github/workflows/portfolio-checks.yml)
 
 The GitHub Actions check compiles the Python examples, validates JSON, checks shell syntax and rejects common secret-file patterns.

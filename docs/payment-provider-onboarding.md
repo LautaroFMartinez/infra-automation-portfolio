@@ -28,14 +28,15 @@ The integrator does not open an account in the client's name, invent KYC data, r
 
 ## Stripe
 
-1. Confirm that Stripe Payments supports the merchant's country/entity setup. Do not assume an Argentine business can open a local Stripe Payments account merely because Stripe APIs are available.
-2. The merchant creates or confirms the Stripe account, users/roles and business profile.
-3. The merchant completes identity/business verification and adds payout details where required.
-4. Start in test mode and create products/prices or the required PaymentIntent/Checkout flow.
-5. Generate test API keys and a webhook endpoint secret in the Dashboard; test and live webhook secrets are separate.
-6. Verify payment state server-side through webhooks, not only a browser redirect.
-7. Test successful, failed, cancelled, refunded and disputed payments before live activation.
-8. For Connect, decide whether the platform uses Standard, Express or Custom connected accounts and who owns KYC, support, payouts and negative-balance risk.
+1. Confirmar que Stripe Payments supports the merchant's country/entity setup. **As of 2026-08-20, Argentina does not appear in Stripe's global list of countries where standard Payments accounts can accept payments.** Do not sell a standard Argentine merchant integration as available by default.
+2. If Argentina appears in a specific Connect, payout or connected-account scenario, validate that exact product and account model; that documentation does not automatically mean an independent Argentine merchant can open Stripe Payments.
+3. The merchant creates or confirms the Stripe account, users/roles and business profile.
+4. The merchant completes identity/business verification and adds payout details where required.
+5. Start in test mode and create products/prices or the required PaymentIntent/Checkout flow.
+6. Generate test API keys and a webhook endpoint secret in the Dashboard; test and live webhook secrets are separate.
+7. Verify payment state server-side through webhooks, not only a browser redirect.
+8. Test successful, failed, cancelled, refunded and disputed payments before live activation.
+9. For Connect, decide whether the platform uses Standard, Express or Custom connected accounts and who owns KYC, support, payouts and negative-balance risk.
 
 Stripe-hosted or embedded Connect onboarding can collect changing requirements, documents and verification information. Connected-account requirements depend on country, business type and requested capabilities.
 
@@ -62,6 +63,8 @@ Official sources:
 9. Create/configure live credentials only after the Business account and merchant capabilities are active.
 10. For multiparty, separately scope seller consent/onboarding, partner attribution, fees and payouts.
 
+In Argentina, PayPal officially documents sending, receiving and withdrawing funds, including regional bank-withdrawal guidance. That **does not prove** that every Checkout, alternative payment method, Pay Later or multiparty/marketplace product is available. Confirm the exact product, currency, account status, fees, withdrawal method and—especially for multiparty—partner approval with PayPal before quoting it.
+
 Do not mark an order paid because it was merely created or approved. Confirm capture and the provider event/state.
 
 Official sources:
@@ -75,15 +78,15 @@ Official sources:
 
 ## Revolut Merchant
 
-1. Check the current country/residency and legal-entity eligibility for Revolut Business before quoting the integration. Do not assume Revolut Business or Merchant is available in Argentina just because the Merchant API is public.
-2. The eligible client opens Revolut Business and completes business/representative verification.
-3. The client applies for and waits for approval of a Merchant account.
+1. Check the current country/residency and legal-entity eligibility for Revolut Business **and separately for Revolut Merchant** before quoting the integration. The current Merchant eligibility list does not include Argentina or Latin America. For an Argentina-based merchant this is an onboarding blocker unless Revolut gives written confirmation for the exact entity/product.
+2. If the client is eligible through another real legal entity, the client opens Revolut Business and completes business/representative verification.
+3. The eligible client applies for and waits for approval of a Merchant account.
 4. After approval, the client generates production API keys from Revolut Business → Merchant overview → Merchant API.
 5. Keep the Secret key server-side; use the Public key only where the documented payment flow requires it.
 6. Send the required `Revolut-Api-Version` header for versioned endpoints.
 7. Configure an HTTPS webhook URL and implement the documented signing verification.
 8. Implement order/payment lifecycle, refunds and idempotency. Use `Idempotency-Key` for sensitive operations such as refunds where supported.
-9. Test all relevant order, payment, payout and dispute events before production.
+9. Separate Sandbox/test from production and verify which payment methods are actually available; some methods, such as Pay by Bank, are not available in Sandbox.
 
 Official sources:
 

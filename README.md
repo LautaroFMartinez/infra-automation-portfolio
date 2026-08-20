@@ -54,6 +54,7 @@ The live portfolio contains the longer-form case files and experience context. T
 - [Backup verification](cases/backup-verification/README.md)
 - [Monitoring and alerting](cases/monitoring-stack/README.md)
 - [n8n and API automation](cases/n8n-api-automation/README.md)
+- [E-commerce webhook reliability lab](cases/ecommerce-webhook-lab/README.md)
 - [Production operations case studies](cases/production-operations/README.md)
 
 ## Evidence and verification

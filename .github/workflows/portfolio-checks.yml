@@ -22,10 +22,14 @@ jobs:
           python-version: '3.11'
 
       - name: Compile Python examples
-        run: python -m py_compile cases/backup-verification/verify_archive.py cases/monitoring-stack/healthcheck.py
+        run: python -m py_compile cases/backup-verification/verify_archive.py cases/monitoring-stack/healthcheck.py cases/ecommerce-webhook-lab/app.py cases/ecommerce-webhook-lab/test_app.py
+
+      - name: Run webhook lab tests
+        working-directory: cases/ecommerce-webhook-lab
+        run: python -m unittest -v
 
       - name: Validate mock JSON
-        run: python -m json.tool cases/n8n-api-automation/mock_payload.json >/dev/null
+        run: python -m json.tool cases/n8n-api-automation/mock_payload.json >/dev/null && python -m json.tool cases/ecommerce-webhook-lab/fixtures/orders.json >/dev/null
 
       - name: Check shell syntax
         run: bash -n cases/linux-docker-audit/audit.sh

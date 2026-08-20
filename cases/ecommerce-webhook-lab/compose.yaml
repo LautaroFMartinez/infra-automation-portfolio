@@ -1,0 +1,14 @@
+services:
+  webhook-lab:
+    build: .
+    ports:
+      - "127.0.0.1:8789:8789"
+    environment:
+      LAB_DB: /data/lab.sqlite3
+      WEBHOOK_SECRET: ${WEBHOOK_SECRET:-demo-secret}
+    volumes:
+      - lab-data:/data
+    restart: unless-stopped
+
+volumes:
+  lab-data:

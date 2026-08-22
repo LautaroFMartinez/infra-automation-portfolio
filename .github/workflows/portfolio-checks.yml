@@ -34,7 +34,8 @@ jobs:
       - name: Check shell syntax
         run: bash -n cases/linux-docker-audit/audit.sh
 
-      - name: Check Markdown links and repository hygiene
+      - name: Check local Markdown links and repository hygiene
         run: |
+          python scripts/check_local_links.py
           ! find . -type f \( -name '*.env' -o -name '*.pem' -o -name '*.key' \) -not -path './.git/*' | grep .
           git diff --check

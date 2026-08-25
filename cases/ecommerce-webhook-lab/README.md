@@ -85,9 +85,11 @@ A real adapter would fetch all pages from the provider using its cursor/offset r
 ```bash
 cd cases/ecommerce-webhook-lab
 WEBHOOK_SECRET='replace-me-locally' docker compose up --build
+# In another terminal, confirm Compose sees the application-level health check.
+docker compose ps
 ```
 
-The example binds to loopback by default. Do not expose it publicly without HTTPS, provider-specific signature verification, authentication for administrative endpoints and a durable queue/worker.
+The example binds to loopback by default. The image health check calls `/health` using Python's standard library, so the slim image does not need an extra HTTP client. Do not expose it publicly without HTTPS, provider-specific signature verification, authentication for administrative endpoints and a durable queue/worker.
 
 ## Production boundary
 

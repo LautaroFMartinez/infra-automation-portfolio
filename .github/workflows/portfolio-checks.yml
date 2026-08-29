@@ -34,6 +34,10 @@ jobs:
       - name: Check shell syntax
         run: bash -n cases/linux-docker-audit/audit.sh
 
+      - name: Validate Docker Compose configuration
+        working-directory: cases/ecommerce-webhook-lab
+        run: docker compose config --quiet
+
       - name: Check local Markdown links and repository hygiene
         run: |
           python scripts/check_local_links.py

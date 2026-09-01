@@ -31,6 +31,19 @@ jobs:
       - name: Validate mock JSON
         run: python -m json.tool cases/n8n-api-automation/mock_payload.json >/dev/null && python -m json.tool cases/ecommerce-webhook-lab/fixtures/orders.json >/dev/null
 
+      - name: Exercise backup verification helper
+        run: |
+          temp_dir=$(mktemp -d)
+          trap 'rm -rf "$temp_dir"' EXIT
+          printf 'synthetic backup proof\\n' > "$temp_dir/README.txt"
+          tar -czf "$temp_dir/archive.tar.gz" -C "$temp_dir" README.txt
+          checksum=$(sha256sum "$temp_dir/archive.tar.gz" | cut -d' ' -f1)
+          python cases/backup-verification/verify_archive.py "$temp_dir/archive.tar.gz" --sha256 "$checksum"
+          if python cases/backup-verification/verify_archive.py "$temp_dir/archive.tar.gz" --sha256 0000000000000000000000000000000000000000000000000000000000000000; then
+            echo 'Expected checksum mismatch was accepted' >&2
+            exit 1
+          fi
+
       - name: Check shell syntax
         run: bash -n cases/linux-docker-audit/audit.sh
 

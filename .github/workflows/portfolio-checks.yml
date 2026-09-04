@@ -22,7 +22,11 @@ jobs:
           python-version: '3.11'
 
       - name: Compile Python examples
-        run: python -m py_compile cases/backup-verification/verify_archive.py cases/monitoring-stack/healthcheck.py cases/ecommerce-webhook-lab/app.py cases/ecommerce-webhook-lab/test_app.py
+        run: python -m py_compile cases/backup-verification/verify_archive.py cases/monitoring-stack/healthcheck.py cases/monitoring-stack/test_healthcheck.py cases/ecommerce-webhook-lab/app.py cases/ecommerce-webhook-lab/test_app.py
+
+      - name: Run monitoring health-check tests
+        working-directory: cases/monitoring-stack
+        run: python -m unittest -v test_healthcheck
 
       - name: Run webhook lab tests
         working-directory: cases/ecommerce-webhook-lab

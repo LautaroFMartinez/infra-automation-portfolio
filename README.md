@@ -46,6 +46,7 @@ The live portfolio contains the longer-form case files and experience context. T
 
 - [Open the live portfolio](https://lau.ar)
 - [Browse the live case files](https://lau.ar/case-files/)
+- [Explore the sanitized interactive portfolio prototype](v2/index.html)
 - [Read the public production operations summary](cases/production-operations/README.md)
 - [Read the payment provider onboarding guide](docs/payment-provider-onboarding.md)
 

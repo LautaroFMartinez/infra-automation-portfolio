@@ -55,8 +55,9 @@ jobs:
         working-directory: cases/ecommerce-webhook-lab
         run: docker compose config --quiet
 
-      - name: Check local Markdown links and repository hygiene
+      - name: Check local links, interactive assets and repository hygiene
         run: |
           python scripts/check_local_links.py
+          python scripts/check_html_assets.py
           ! find . -type f \( -name '*.env' -o -name '*.pem' -o -name '*.key' \) -not -path './.git/*' | grep .
           git diff --check

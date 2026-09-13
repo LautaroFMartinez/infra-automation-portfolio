@@ -48,6 +48,9 @@ jobs:
             exit 1
           fi
 
+      - name: Validate SVG assets
+        run: python scripts/check_svg_assets.py
+
       - name: Check shell syntax
         run: bash -n cases/linux-docker-audit/audit.sh
 

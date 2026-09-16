@@ -72,6 +72,23 @@ The examples are designed to be inspectable and runnable where practical:
 
 The GitHub Actions check compiles the Python examples, validates JSON, checks shell syntax and rejects common secret-file patterns.
 
+### Run the public checks locally
+
+From the repository root, the same evidence can be reproduced without credentials or private infrastructure:
+
+```bash
+(cd cases/monitoring-stack && python -m unittest -v test_healthcheck)
+(cd cases/ecommerce-webhook-lab && python -m unittest -v)
+python -m json.tool cases/n8n-api-automation/mock_payload.json >/dev/null
+python scripts/check_local_links.py
+python scripts/check_html_assets.py
+python scripts/check_svg_assets.py
+bash -n cases/linux-docker-audit/audit.sh
+(cd cases/ecommerce-webhook-lab && docker compose config --quiet)
+```
+
+The final Compose command only validates the configuration; it does not start the lab or contact an external provider.
+
 ## Delivery principles
 
 - Scope a small first stage.

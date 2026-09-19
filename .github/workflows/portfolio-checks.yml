@@ -21,8 +21,8 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Compile Python examples
-        run: python -m py_compile cases/backup-verification/verify_archive.py cases/monitoring-stack/healthcheck.py cases/monitoring-stack/test_healthcheck.py cases/ecommerce-webhook-lab/app.py cases/ecommerce-webhook-lab/test_app.py
+      - name: Compile all tracked Python files
+        run: python -m py_compile $(git ls-files '*.py')
 
       - name: Run monitoring health-check tests
         working-directory: cases/monitoring-stack

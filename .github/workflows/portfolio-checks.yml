@@ -58,6 +58,10 @@ jobs:
         working-directory: cases/ecommerce-webhook-lab
         run: docker compose config --quiet
 
+      - name: Build the webhook lab image
+        working-directory: cases/ecommerce-webhook-lab
+        run: docker compose build --pull
+
       - name: Check local links, interactive assets and repository hygiene
         run: |
           python scripts/check_local_links.py

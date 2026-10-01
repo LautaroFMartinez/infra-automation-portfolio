@@ -26,6 +26,17 @@
 - Turning an operational problem into a bounded, measurable delivery.
 - Making the workflow observable and recoverable.
 
+## How a first stage works
+
+A small engagement starts with a bounded, evidence-backed deliverable rather than an open-ended migration:
+
+1. **Discover:** inventory the relevant services, interfaces, failure modes and recovery constraints.
+2. **Prioritize:** turn the findings into a short backlog with impact, risk, dependencies and an explicit out-of-scope list.
+3. **Implement safely:** apply the smallest useful change with a backup, rollback note, health check and observable result.
+4. **Hand off:** leave reproducible commands, validation evidence and the next decision point.
+
+Typical first-stage outputs are a Linux/Docker audit, a backup verification runbook, a monitoring health check or a synthetic webhook/API reliability proof. The repository contains a runnable example or validation path for each of those areas; it does not claim access to a client's production systems.
+
 ## Visual overview
 
 ### Automation and operations architecture

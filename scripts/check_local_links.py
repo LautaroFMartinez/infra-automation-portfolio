@@ -25,6 +25,7 @@ def tracked_markdown_files() -> list[Path]:
 
 def main() -> int:
     missing: list[str] = []
+    repository_root = Path.cwd().resolve()
 
     for markdown in tracked_markdown_files():
         text = markdown.read_text(encoding="utf-8")
@@ -34,11 +35,16 @@ def main() -> int:
                 continue
 
             resolved = (markdown.parent / target).resolve()
-            if not resolved.exists():
-                missing.append(f"{markdown}: {raw_target}")
+            try:
+                resolved.relative_to(repository_root)
+            except ValueError:
+                missing.append(f"{markdown}: {raw_target} (outside repository)")
+            else:
+                if not resolved.exists():
+                    missing.append(f"{markdown}: {raw_target}")
 
     if missing:
-        print("Missing local Markdown targets:", file=sys.stderr)
+        print("Invalid local Markdown targets:", file=sys.stderr)
         print("\n".join(f"- {item}" for item in missing), file=sys.stderr)
         return 1
 

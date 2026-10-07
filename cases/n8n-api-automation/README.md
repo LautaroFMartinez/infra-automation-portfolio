@@ -16,6 +16,16 @@ Operational information is spread across forms, email, spreadsheets and APIs, cr
 
 The workflow removes a measurable manual step without creating silent failures or irreversible actions.
 
+## Runnable proof
+
+The sanitized fixture can be validated locally without credentials or an external API:
+
+```bash
+python validate_payload.py mock_payload.json
+```
+
+The validator checks the required intake fields and makes the human-review route explicit. A real workflow should apply equivalent validation before deduplication or any side effect.
+
 ## Safety
 
 Examples must use mock payloads and placeholder credentials. Never commit client data, API tokens or real webhook URLs.

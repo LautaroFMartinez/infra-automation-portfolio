@@ -35,6 +35,9 @@ jobs:
       - name: Validate mock JSON
         run: python -m json.tool cases/n8n-api-automation/mock_payload.json >/dev/null && python -m json.tool cases/ecommerce-webhook-lab/fixtures/orders.json >/dev/null
 
+      - name: Validate n8n intake fixture
+        run: python cases/n8n-api-automation/validate_payload.py cases/n8n-api-automation/mock_payload.json
+
       - name: Exercise backup verification helper
         run: |
           temp_dir=$(mktemp -d)

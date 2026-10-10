@@ -38,6 +38,10 @@ jobs:
       - name: Validate n8n intake fixture
         run: python cases/n8n-api-automation/validate_payload.py cases/n8n-api-automation/mock_payload.json
 
+      - name: Run n8n payload validator tests
+        working-directory: cases/n8n-api-automation
+        run: python -m unittest -v test_validate_payload
+
       - name: Exercise backup verification helper
         run: |
           temp_dir=$(mktemp -d)

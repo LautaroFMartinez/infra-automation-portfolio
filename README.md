@@ -37,6 +37,16 @@ A small engagement starts with a bounded, evidence-backed deliverable rather tha
 
 Typical first-stage outputs are a Linux/Docker audit, a backup verification runbook, a monitoring health check or a synthetic webhook/API reliability proof. The repository contains a runnable example or validation path for each of those areas; it does not claim access to a client's production systems.
 
+## Choose a useful starting point
+
+The smallest useful entry point depends on the immediate risk:
+
+- **Unclear exposure or service health:** start with the [Linux/Docker audit](cases/linux-docker-audit/README.md).
+- **Uncertain recoverability:** start with the [backup verification runbook](cases/backup-verification/README.md).
+- **Repeated manual API or webhook work:** start with the [n8n/API proof](cases/n8n-api-automation/README.md) or the [webhook reliability lab](cases/ecommerce-webhook-lab/README.md).
+
+Each path is intentionally bounded: establish evidence first, define what is out of scope, then leave a reproducible validation step rather than an opaque handoff.
+
 ## Visual overview
 
 ### Automation and operations architecture

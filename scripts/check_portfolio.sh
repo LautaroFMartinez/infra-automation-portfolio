@@ -22,6 +22,10 @@ printf 'synthetic backup proof\n' > "$work_dir/README.txt"
 tar -czf "$work_dir/archive.tar.gz" -C "$work_dir" README.txt
 checksum=$(sha256sum "$work_dir/archive.tar.gz" | cut -d' ' -f1)
 python cases/backup-verification/verify_archive.py "$work_dir/archive.tar.gz" --sha256 "$checksum"
+if python cases/backup-verification/verify_archive.py "$work_dir/archive.tar.gz" --sha256 "$(printf '0%.0s' {1..64})"; then
+  echo 'Expected checksum mismatch was accepted' >&2
+  exit 1
+fi
 
 python scripts/check_svg_assets.py
 python scripts/check_local_links.py

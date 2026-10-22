@@ -18,7 +18,7 @@ A run is successful only when the resulting artifact can be checked and opened w
 
 ## Run the read-only verifier
 
-The tracked helper checks the archive's SHA-256 (when supplied), opens it with Python's `tarfile` reader and prints the first ten members. It never extracts or modifies the archive.
+The tracked helper checks the archive's SHA-256 (when supplied), opens it with Python's `tarfile` reader, reads every regular-file payload and prints the first ten members. It never extracts or modifies the archive; unreadable or truncated archives fail with a non-zero result. A checksum remains necessary to detect silent content changes.
 
 ```bash
 cd cases/backup-verification

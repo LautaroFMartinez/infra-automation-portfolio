@@ -21,49 +21,8 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Compile all tracked Python files
-        run: python -m py_compile $(git ls-files '*.py')
-
-      - name: Run monitoring health-check tests
-        working-directory: cases/monitoring-stack
-        run: python -m unittest -v test_healthcheck
-
-      - name: Run webhook lab tests
-        working-directory: cases/ecommerce-webhook-lab
-        run: python -m unittest -v
-
-      - name: Validate mock JSON
-        run: python -m json.tool cases/n8n-api-automation/mock_payload.json >/dev/null && python -m json.tool cases/ecommerce-webhook-lab/fixtures/orders.json >/dev/null
-
-      - name: Validate n8n intake fixture
-        run: python cases/n8n-api-automation/validate_payload.py cases/n8n-api-automation/mock_payload.json
-
-      - name: Run n8n payload validator tests
-        working-directory: cases/n8n-api-automation
-        run: python -m unittest -v test_validate_payload
-
-      - name: Exercise backup verification helper
-        run: |
-          temp_dir=$(mktemp -d)
-          trap 'rm -rf "$temp_dir"' EXIT
-          printf 'synthetic backup proof\\n' > "$temp_dir/README.txt"
-          tar -czf "$temp_dir/archive.tar.gz" -C "$temp_dir" README.txt
-          checksum=$(sha256sum "$temp_dir/archive.tar.gz" | cut -d' ' -f1)
-          python cases/backup-verification/verify_archive.py "$temp_dir/archive.tar.gz" --sha256 "$checksum"
-          if python cases/backup-verification/verify_archive.py "$temp_dir/archive.tar.gz" --sha256 0000000000000000000000000000000000000000000000000000000000000000; then
-            echo 'Expected checksum mismatch was accepted' >&2
-            exit 1
-          fi
-
-      - name: Validate SVG assets
-        run: python scripts/check_svg_assets.py
-
-      - name: Check shell syntax
-        run: bash -n cases/linux-docker-audit/audit.sh
-
-      - name: Validate Docker Compose configuration
-        working-directory: cases/ecommerce-webhook-lab
-        run: docker compose config --quiet
+      - name: Run canonical credential-free portfolio checks
+        run: bash scripts/check_portfolio.sh
 
       - name: Build the webhook lab image
         working-directory: cases/ecommerce-webhook-lab

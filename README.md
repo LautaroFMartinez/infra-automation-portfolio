@@ -70,6 +70,7 @@ The live portfolio contains the longer-form case files and experience context. T
 - [Explore the sanitized interactive portfolio prototype](v2/index.html)
 - [Read the public production operations summary](cases/production-operations/README.md)
 - [Read the payment provider onboarding guide](docs/payment-provider-onboarding.md)
+- [Choose a case by evidence and runnable proof](docs/evidence-index.md)
 
 ## Cases
 

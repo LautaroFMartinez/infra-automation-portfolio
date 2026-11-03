@@ -12,8 +12,9 @@ done < <(git ls-files -z '*.py')
 (cd cases/monitoring-stack && python -m unittest -v test_healthcheck)
 (cd cases/ecommerce-webhook-lab && python -m unittest -v)
 (cd cases/n8n-api-automation && python -m unittest -v test_validate_payload)
-python -m json.tool cases/n8n-api-automation/mock_payload.json >/dev/null
-python -m json.tool cases/ecommerce-webhook-lab/fixtures/orders.json >/dev/null
+while IFS= read -r -d '' file; do
+  python -m json.tool "$file" >/dev/null
+done < <(git ls-files -z '*.json')
 python cases/n8n-api-automation/validate_payload.py cases/n8n-api-automation/mock_payload.json
 
 work_dir=$(mktemp -d)

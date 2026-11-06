@@ -34,7 +34,10 @@ python scripts/check_html_assets.py
 bash -n cases/linux-docker-audit/audit.sh
 (cd cases/ecommerce-webhook-lab && docker compose config --quiet)
 
-if find . -type f \( -name '*.env' -o -name '*.pem' -o -name '*.key' \) -not -path './.git/*' -print -quit | grep -q .; then
+if find . -type f \( \
+  -name '*.env' -o -name '*.pem' -o -name '*.key' -o \
+  -iname '*secret*' -o -iname '*token*' -o -iname 'credentials.json' \
+\) -not -path './.git/*' -print -quit | grep -q .; then
   echo 'Potential secret file found in repository' >&2
   exit 1
 fi

@@ -16,6 +16,18 @@ Each proof has a short command, a bounded result and a longer case page explaini
 
 - **[Production operations](../cases/production-operations/README.md)** — anonymized summaries of monitoring-agent migration, CI/CD dependency removal, temporary capacity scaling and a RabbitMQ incident. The page states which outcomes are approximate, ongoing or intentionally not claimed.
 
+## What the first handoff contains
+
+The repository's examples map to a bounded first delivery rather than an open-ended implementation:
+
+- **Evidence:** the command, fixture or observation that supports each finding.
+- **Decision:** prioritized risks, quick wins, dependencies and explicit out-of-scope work.
+- **Safety:** backup/rollback notes before state-changing work, plus secret and access boundaries.
+- **Verification:** a reproducible check with a visible success or failure result.
+- **Next step:** the smallest follow-up decision needed to continue, defer or stop.
+
+This structure is intentional: a client can review the result and choose the next investment without treating a sanitized example as proof of access to production.
+
 ## Boundaries
 
 These materials are proof layers, not production access or client testimonials. The examples use synthetic or sanitized data, and the public checks avoid credentials and external provider calls. A real engagement still requires discovery, authorization, backups, rollback criteria and provider-specific validation.

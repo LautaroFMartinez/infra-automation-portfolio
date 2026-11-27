@@ -104,6 +104,16 @@ bash scripts/check_portfolio.sh
 
 The helper compiles tracked Python files, runs the case tests and fixture checks, exercises backup verification, validates links/assets/shell syntax, checks the Compose configuration and rejects common secret-file patterns. It does not start the lab or contact an external provider. Individual checks remain visible in the workflow at [.github/workflows/portfolio-checks.yml](.github/workflows/portfolio-checks.yml).
 
+### A quick technical review path
+
+For a fast, evidence-based review:
+
+1. Choose the case that matches the operational risk and read its scope and boundaries.
+2. Run `bash scripts/check_portfolio.sh` to exercise the repository-wide credential-free checks.
+3. Inspect the case command or fixture and compare its stated success/failure result with the implementation.
+
+This path separates what can be reproduced from the repository from what would require authorized access to a real environment.
+
 ## Delivery principles
 
 - Scope a small first stage.
